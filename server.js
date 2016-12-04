@@ -4,6 +4,8 @@ var mongojs = require('mongojs');
 var db = mongojs('contactlist', ['contactlist']);
 var bodyParser = require('body-parser');
 
+app.set('port', (process.env.PORT || 3000));
+
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.json());
 
@@ -43,6 +45,6 @@ app.put('/contactlist/:id', function (req, res) {
     });
 
 });
-
-app.listen(3000);
-console.log("Server running on port 3000");
+app.listen(app.get('port'), function() {
+  console.log('Node app is running on port', app.get('port'));
+});
